@@ -123,7 +123,7 @@ void setTmpCommand() {
 }
 
 void setHygroCommand() {
-  int timeUp = commandHygro / 16;
+  int timeUp = commandHygro * 255 / 80;
   digitalWrite(PWM_hygro, HIGH);
   delay(timeUp*100);
   digitalWrite(PWM_hygro, LOW);
