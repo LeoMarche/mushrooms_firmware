@@ -44,10 +44,11 @@ void setup() {
    Serial.begin(9600);
    t = 0;
    expectedTmp = 30;
-   expectedHygro = 30.0;
+   expectedHygro = 70.0;
    coeffPropTmp = 1.0;
    coeffIntTmp = 0.0003;
-   coeffPropHygro = 1.0;
+   coeffPropHygro = 0.1;
+   coeffIntHygro = 0.003;
    lcd.begin(16, 2);
    lcd.setRGB(0,255,0);
 }
@@ -65,8 +66,9 @@ void loop() {
   Serial.println(retourTmp);
   lcd.clear();
   lcd.setCursor(0, 0);
-  lcd.print(retourTmp);             // ou lcd.print(nom de la variable à afficher);
-
+  lcd.print(retourTmp);           // ou lcd.print(nom de la variable à afficher);
+  lcd.print("   ");
+  lcd.print(retourHygro);
   float currt = millis();
 
   // Get dt
@@ -124,8 +126,10 @@ void setTmpCommand() {
 
 void setHygroCommand() {
   int timeUp = commandHygro * 255 / 80;
+  lcd.setCursor(10, 1);
+  lcd.print(timeUp);
   digitalWrite(PWM_hygro, HIGH);
-  delay(timeUp*100);
+  delay(timeUp*300);
   digitalWrite(PWM_hygro, LOW);
-  delay((16-timeUp)*100);
+  delay((16-timeUp)*300);
 }
