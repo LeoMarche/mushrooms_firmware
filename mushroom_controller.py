@@ -2,23 +2,16 @@ import serial
 import serial.tools.list_ports
 import time
 
-def get_ports():
-    ports = serial.tools.list_ports.comports(include_links=False)
-    if len(ports) == 0:
-        raise Exception('failed to find a port')
-    return ports
+PORT = "COM12"
 
 def get_connection():
-    ports = get_ports()
-    
-    for port in ports:
-        try:
-            ser = serial.Serial("COM12", baudrate=9600, timeout=10)
-            time.sleep(5)
-            return ser
-        except Exception as e:
-            print(e)
-            continue
+    global PORT
+    try:
+        ser = serial.Serial(PORT, baudrate=9600, timeout=10)
+        time.sleep(5)
+        return ser
+    except Exception as e:
+        print(e)
 
 def set_temperature(conn, temp):
     to_send = '1 '+str(temp)+"\r\n"
