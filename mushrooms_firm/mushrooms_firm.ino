@@ -59,14 +59,40 @@ void loop() {
     t = millis();
   }
 
+  int nbAvailable = Serial.available();
+
+  // You can specify indications to the arduino using op number
+  // through serial communication
+  while(nbAvailable > 0) {
+    int op = Serial.parseInt();
+    if(op==1){
+      expectedTmp = Serial.parseFloat();
+      Serial.println(expectedTmp);
+    } else if(op==2) {
+      expectedHygro = Serial.parseFloat();
+      Serial.println(expectedHygro);
+    } else if (op==3) {
+      Serial.println(expectedTmp);
+    } else if (op==4) {
+      Serial.println(expectedHygro);
+    } else if (op==5) {
+      Serial.println(retourTmp);
+    } else if (op==6) {
+      Serial.println(retourHygro);
+    } else {
+      Serial.println(op);
+    }
+    nbAvailable = Serial.available();
+  }
+  
   // Read sensors
   retourTmp = TH06.ReadTemperature();
   retourHygro = TH06.ReadHumidity();
 
-  Serial.println(retourTmp);
+  // Print command anc actual to LCD
   lcd.clear();
   lcd.setCursor(0, 0);
-  lcd.print(retourTmp);           // ou lcd.print(nom de la variable à afficher);
+  lcd.print(expectedTmp);
   lcd.print("   ");
   lcd.print(retourHygro);
   float currt = millis();
@@ -75,36 +101,20 @@ void loop() {
   dt = currt-t;
   t = currt;
 
-  // Execute ORDER 66
+  // Get command using PI corrector
   commandTmp = pid(coeffPropTmp, coeffIntTmp, expectedTmp - retourTmp, &integraleTmpError, dt/1000);
   commandHygro = pid(coeffPropHygro, coeffIntHygro, expectedHygro - retourHygro, &integraleHygroError, dt/1000);
 
   commandTmp = limit(commandTmp);
   commandHygro = limit(commandHygro);
 
+  // Apply command
   setTmpCommand();
   setHygroCommand();
 }
 
-/*
-float fract(float x) { return x - int(x); }
-
-float mix(float a, float b, float t) { return a + (b - a) * t; }
-
-float step(float e, float x) { return x < e ? 0.0 : 1.0; }
-
-float* hsv2rgb(float h, float s, float b, float rgb[3]) {
-  rgb[0] = b * mix(1.0, constrain(abs(fract(h + 1.0) * 6.0 - 3.0) - 1.0, 0.0, 1.0), s);
-  rgb[1] = b * mix(1.0, constrain(abs(fract(h + 0.6666666) * 6.0 - 3.0) - 1.0, 0.0, 1.0), s);
-  rgb[2] = b * mix(1.0, constrain(abs(fract(h + 0.3333333) * 6.0 - 3.0) - 1.0, 0.0, 1.0), s);
-  return rgb;
-}
-*/
-
 float pid(float coeffProp, float coeffInt, float error, float *integraleError, float dt) {
   (*integraleError) += error * dt;
-  Serial.print("Integral error :");
-  Serial.println(*integraleError);
   return coeffProp * error + coeffInt * (*integraleError);
 }
 
@@ -120,7 +130,6 @@ float limit(float commandValue){
 void setTmpCommand() {
   lcd.setCursor(0, 1);
   lcd.print((int) (commandTmp / 5 * 255));
-  Serial.println((int) (commandTmp / 5 * 255));
   analogWrite(PWM_tmp, (int) (commandTmp / 5 * 255));
 }
 
