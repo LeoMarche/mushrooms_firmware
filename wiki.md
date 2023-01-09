@@ -47,6 +47,7 @@ Pour répondre à la problémtique, nous nous sommes posés un cahier des charge
 
 Notre problématique principale étant le contrôle de la température et de l'humidité dans l'environnement, nous avons besoin, pour chacune de ces deux métriques, d'un ou plusieurs capteur(s) et actionneur(s).
 
+
 ### Electronique
 
 Pour gérer la logique d'asservissement, nous avons besoin d'une boucle de contrôle (numérique ou analogique). Nous avons décidés de la programmer sur un microcontroleur Arduino.
@@ -59,11 +60,48 @@ En terme d'alimentation, nous utilisons deux tensions différentes :
 
 Pour augmenter la température dans l'incubateur, nous avons opté pour une résistance chauffante, placée sur un radiateur.
 
-<img src="photos/rad.png" alt="drawing" width="300"/>
-
 Pour augmenter  l'humidité, nous avons choisi un système actif, un petit atomiseur ultrasonique, responsable de projeter des millions de gouttelettes d'eau, dont une grande partie viendra saturer l'air dans le volume. Ce système a l'avantage d'humidifier l'air extrêmement vite, avec le défaut que le contrôle précis de l'humidité est impossible. On peut donc considérer que l'humidité varie en tout ou rien, de 40% à 100%. Nous avons fait ce choix en conscience, puisque que pour toutes les espèces, l'humidité optimale est la saturation de l'air, à 100% d'humidité.
 
-<img src="photos/atom.png" alt="drawing" width="300"/>
+### Liste exhaustive
+
+Pour réunir au même endroit tout le matériel, et préciser ceux qui ne seront pas mentionnés dans cette page wiki car triviaux, la liste des composants :
+
+- 1x - Glacière isotherme
+- 1x - RaspBerry Pi
+- 1x - Arduino Nano
+
+<img src="photos/montage.png" alt="drawing" width="300"/>
+
+- 1x - câble connexion (mini USB B - USB)
+- 2x - Sondes thermo-hygrométrique
+
+<img src="photos/temp.png" alt="drawing" width="300"/>
+
+- 1x - Afficheur LCD
+
+<img src="photos/lcd.png" alt="drawing" width="300"/>
+
+- 1x - Alimentation 12v
+- 1x - Convertisseur buck 12V vers 5V
+
+<img src="photos/buck.png" alt="drawing" width="300"/>
+
+- Système de chauffe
+    - 1x - Pilote de tension MOSFET
+
+<img src="photos/mosfet.png" alt="drawing" width="300"/>
+
+    - 1x - Résistance chauffante
+    - 1x - Radiateur thermique
+    
+<img src="photos/rad.png" alt="drawing" width="300"/>
+
+- Système d’humidification 
+    - 1x - Système de contrôle
+    - 1x - Atomiseur d’eau
+<!-- - Système de commande local
+    - 1x Potentiomètre ? (analogique / numérique) (fourni)
+    - 2x Boutons push ? (fourni) -->
 
 ## Scénario d’utilisation
 
