@@ -43,8 +43,8 @@ void setup() {
    TH06.begin();
    Serial.begin(9600);
    t = 0;
-   expectedTmp = 30;
-   expectedHygro = 70.0;
+   expectedTmp = 24;
+   expectedHygro = 95.0;
    coeffPropTmp = 1.0;
    coeffIntTmp = 0.0003;
    coeffPropHygro = 0.1;
@@ -92,7 +92,7 @@ void loop() {
   // Print command anc actual to LCD
   lcd.clear();
   lcd.setCursor(0, 0);
-  lcd.print(expectedTmp);
+  lcd.print(retourTmp);
   lcd.print("   ");
   lcd.print(retourHygro);
   float currt = millis();
