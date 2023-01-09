@@ -2,7 +2,8 @@ import serial
 import serial.tools.list_ports
 import time
 
-PORT = "COM12"
+PORT = "/dev/ttyUSB0"
+
 
 def get_connection():
     global PORT
@@ -13,11 +14,13 @@ def get_connection():
     except Exception as e:
         print(e)
 
+
 def set_temperature(conn, temp):
     to_send = '1 '+str(temp)+"\r\n"
     conn.write(to_send.encode())
     c = conn.readline().rstrip()
     return float(c)
+
 
 def set_hygro(conn, hygro):
     to_send = '2 '+str(hygro)+"\r\n"
@@ -25,26 +28,32 @@ def set_hygro(conn, hygro):
     c = conn.readline().rstrip()
     return float(c)
 
+
 def get_expected_tmp(conn):
-    conn.write(b"3\r\n")
+    conn.write(b"3\n")
     c = conn.readline().rstrip()
     return float(c)
+
 
 def get_expected_hygro(conn):
-    conn.write(b"4\r\n")
+    conn.write(b"4\n")
     c = conn.readline().rstrip()
     return float(c)
+
 
 def get_actual_tmp(conn):
-    conn.write(b"5\r\n")
+    conn.write(b"5\n")
     c = conn.readline().rstrip()
     return float(c)
+
 
 def get_actual_hygro(conn):
-    conn.write(b"6\r\n")
+    conn.write(b"6\n")
     c = conn.readline().rstrip()
     return float(c)
 
+
+# Testing connection
 if __name__ == "__main__":
     conn = get_connection()
     print("===DEFAULT COMMAND===")
