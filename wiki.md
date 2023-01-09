@@ -16,7 +16,7 @@ Nous avons tous participés à la rédaction de la spécification, à la recherc
 
 La myciculture in vitro est une pratique qui consiste à faire grandir du mycélium, la partie principale d'un champignon, dans un environnement artificiel. Le développement est divisé en trois phases qui ont des besoins différents pour une croissance optimale :
 
-1. L'incubation sur boite de Petri
+1. L'incubation sur boîte de Petri
 2. L'inoculation et la colonisation
 3. La fructification
 
@@ -28,7 +28,7 @@ Ces phases ont toutes des besoins en température et en humidité différents, q
 
 ### Cahier des charges
 
-Pour répondre à la problémtique, nous nous sommes posés un cahier des charges, sous forme d'une liste
+Pour répondre à la problématique, nous nous sommes posés un cahier des charges, sous forme d'une liste
 
 - Stabilité des variables suivantes (et tolérances respectives) 
     - humidité de l’air (± 5%)
@@ -41,7 +41,6 @@ Pour répondre à la problémtique, nous nous sommes posés un cahier des charge
     - "Colonisation du grain" : 24°C ; 95%
     - "Fructification" : XX°C ; 95%
 - Possibilité de fonctionner sans le Pi (avec le contrôle manuel)
-
 
 ## Matériel utilisé
 
@@ -66,48 +65,48 @@ Pour augmenter  l'humidité, nous avons choisi un système actif, un petit atomi
 
 Pour réunir au même endroit tout le matériel, et préciser ceux qui ne seront pas mentionnés dans cette page wiki car triviaux, la liste des composants :
 
-- 1x - Glacière isotherme
-- 1x - RaspBerry Pi
-- 1x - Arduino Nano
+- Glacière isotherme
+- RaspBerry Pi
+- Arduino Nano
 
 <img src="photos/montage.png" alt="drawing" width="300"/>
 
-- 1x - câble connexion (mini USB B - USB)
+- câble connexion (mini USB B - USB)
 - 2x - Sondes thermo-hygrométrique
 
 <img src="photos/temp.png" alt="drawing" width="300"/>
 
-- 1x - Afficheur LCD
+- Afficheur LCD
 
 <img src="photos/lcd.png" alt="drawing" width="300"/>
 
-- 1x - Alimentation 12v
-- 1x - Convertisseur buck 12V vers 5V
+- Alimentation 12v
+- Convertisseur buck 12V vers 5V
 
 <img src="photos/buck.png" alt="drawing" width="300"/>
 
-- Système de chauffe
-    - 1x - Pilote de tension MOSFET
+- Pilote de tension MOSFET
 
 <img src="photos/mosfet.png" alt="drawing" width="300"/>
 
-    - 1x - Résistance chauffante
-    - 1x - Radiateur thermique
+- Résistance chauffante
+- Radiateur thermique
     
 <img src="photos/rad.png" alt="drawing" width="300"/>
 
-- Système d’humidification 
-    - 1x - Système de contrôle
-    - 1x - Atomiseur d’eau
+- Atomiseur d’eau + système de contrôle
 <!-- - Système de commande local
-    - 1x Potentiomètre ? (analogique / numérique) (fourni)
-    - 2x Boutons push ? (fourni) -->
+    - Potentiomètre ? (analogique / numérique) (fourni)
+    - Boutons push ? (fourni) -->
 
 ## Scénario d’utilisation
 
-_c’est ici que vous décrivez en détail ce que votre projet fait, comment il fonctionne, avec à l’appui captures d’écran et vidéo(s) de démonstration; à vous de choisir la structure des sous-sections_
+L'incubateur viendra remplacer la première version de Jean, qui profitera de nos améliorations. La croissance en phase 2 et 3 étant relativement lente, l'autonomie du nouveau système sera bienvenue pour garantir un meilleur rendement de récolte de champignons.
 
-L'avantage de notre projet vis-à-vis de l'utilisation, c'est que notre création sera utilisée en pratique tous les jours pendant encore quelques années. L'incubateur viendra remplacer la première version primive de Jean, qui profitera de nos améliorations. La croissance en phase 2 et 3 étant relativement lente, l'autonomie du nouveau système sera bienvenue pour garantir un meilleur rendement de récolte de champignons.
+
+### Vidéo démonstration
+[Vidéo](https://drive.google.com/file/d/1ylCFXbtSbC1U3Ff9kjLJv8QUzL52shs3/view)
+<!-- [Vidéo démo](/photos/video.mp4 "Vidéo démonstration du projet en fonctionnement") -->
 
 ### Pour une récolte type
 
