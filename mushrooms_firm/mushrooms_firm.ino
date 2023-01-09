@@ -79,8 +79,6 @@ void loop() {
       Serial.println(retourTmp);
     } else if (op==6) {
       Serial.println(retourHygro);
-    } else {
-      Serial.println(op);
     }
     nbAvailable = Serial.available();
   }
