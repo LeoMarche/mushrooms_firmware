@@ -1,0 +1,57 @@
+<!doctype html>
+<head>
+  <title>blblblbl</title>
+  <script src="https://cdn.plot.ly/plotly-2.17.0.min.js"></script>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div id="gd"></div>
+  <form action="/set_settings" method="POST">
+    <label for="temp">Température:</label>
+    <input id="temp" type="number" name="temp"></input>
+
+    <label for="hygro">Humidité:</label>
+    <input id="hygro" type="number" name="hygro"></input>
+    <input type="submit" value="Envoyer">
+  </form>
+  <script>
+      let form = document.querySelector("form");
+      let timeout;
+      form.addEventListener("submit", e => {
+        e.preventDefault();
+        fetch('/set_settings', {
+            method: 'POST',
+            body: JSON.stringify({
+              temp: parseInt(document.querySelector("#temp").value),
+              hygro: parseInt(document.querySelector("#hygro").value),
+            }),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        if (timeout) {
+          clearTimeout(timeout);
+        }
+        timeout = setTimeout(main, 500);
+      }, false);
+
+      async function main() {
+        let {data, time} = await (await fetch('/data', {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+            },
+        })).json();
+        console.log(data);
+        Plotly.newPlot("gd", {
+            "data": data.map(o => {
+              o.x = o.x.map(v => new Date(v));
+              return o;
+            }),
+            "layout": { "width": 800, "height": 450}
+        });
+        timeout = setTimeout(main, 5000);
+      }
+      main();
+  </script>
+</body>
