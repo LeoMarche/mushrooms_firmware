@@ -40,7 +40,8 @@ Pour répondre à la problématique, nous nous sommes posés un cahier des charg
     - "Croissance sèche" : 24°C ; XX%
     - "Colonisation du grain" : 24°C ; 95%
     - "Fructification" : XX°C ; 95%
-- Possibilité de fonctionner sans le Pi (avec le contrôle manuel)
+- Possibilité de fonctionner sans le Raspberry Pi (avec un contrôle manuel)
+- Pouvoir paramétrer et surveiller à distance le système
 
 ## Matériel utilisé
 
@@ -60,6 +61,21 @@ En terme d'alimentation, nous utilisons deux tensions différentes :
 Pour augmenter la température dans l'incubateur, nous avons opté pour une résistance chauffante, placée sur un radiateur.
 
 Pour augmenter  l'humidité, nous avons choisi un système actif, un petit atomiseur ultrasonique, responsable de projeter des millions de gouttelettes d'eau, dont une grande partie viendra saturer l'air dans le volume. Ce système a l'avantage d'humidifier l'air extrêmement vite, avec le défaut que le contrôle précis de l'humidité est impossible. On peut donc considérer que l'humidité varie en tout ou rien, de 40% à 100%. Nous avons fait ce choix en conscience, puisque que pour toutes les espèces, l'humidité optimale est la saturation de l'air, à 100% d'humidité.
+
+### Contrôle à distance
+
+Afin de pouvoir contrôler le système, nous avons une raspberry PI connectée à l'arduino par un port usb série. À travers ce port, nous avons la possibilité de lire les températures et humidités attendues et effectives, ainsi que d'écrire de nouvelles températures et humidités attendues. Nous avons donc écrit un serveur sur le raspberry PI, qui va ainsi se connecter au système et enregistrer les données reçues par le système. Ce serveur sert également un site web sur lequel nous pouvons visualiser les données enregistrées sur un graphique et changer la température et l'humidité.
+
+Le serveur donne également un endpoit pour spécifier un "programme", c'est-à-dire un ensemble de dates avec une température et une humidité à chacune d'entre elles, que le serveur suivra.
+
+Exemple de requète qui modifie la température et l'humidité le 12 et 15 janvier 2023:
+
+```json
+[
+    {"date": "2023-01-12T12:00:00", "hygro": 40.0, "temp": 50.0},
+    {"date": "2023-01-15T12:00:20", "hygro": 50.0, "temp": 25.0}
+]
+```
 
 ### Liste exhaustive
 
